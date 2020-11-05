@@ -15,9 +15,16 @@ class App extends React.Component {
       hasTimer: false,
       timerOutput: false
     }
-    this.secondsInput = React.createRef();
+    this.inputHandler = this.inputHandler.bind(this)
+    this.startTimer = this.startTimer.bind(this)
+    this.countDown = this.countDown.bind(this)
+    this.stopTimer = this.stopTimer.bind(this)
+    this.resetTimer = this.resetTimer.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.addTimerBlock = this.addTimerBlock.bind(this)
+    this.timerOutput = this.timerOutput.bind(this)
+    this.timerFalse = this.timerFalse.bind(this)
+    this.secondsInput = React.createRef();
   }
 
   inputHandler = (e) => {
@@ -37,10 +44,8 @@ class App extends React.Component {
       await this.setState({seconds: seconds-1})
 
       if(this.state.seconds === 0){
-        await this.setState({timerOutput: true})
+       this.timerOutput()
       }  
-    }else if(seconds === -1){
-      await this.setState({timerOutput: false})
     }
     else {
       clearInterval(this.timer);
@@ -61,21 +66,26 @@ class App extends React.Component {
   async handleToggle(){
     let newTrigger = !this.state.trigger
     await this.setState({trigger: newTrigger})
-    
-    if(this.state.trigger){
-      this.startTimer()
-    }
   }
 
   async addTimerBlock(){
     let newTimer = !this.state.hasTimer
-    await this.setState({hasTimer: newTimer})
-    if(! this.state.hasTimer){
+    if(this.state.hasTimer){
+      this.stopTimer()
       this.resetTimer()
     }else{
       this.startTimer()
     }
-    
+    await this.setState({hasTimer: newTimer})
+  }
+
+  async timerOutput(){
+    await this.setState({timerOutput: true})
+    setInterval(this.timerFalse, 1000);
+  }
+
+  async timerFalse(){
+    await this.setState({timerOutput : false})
   }
 
   render() {
@@ -88,13 +98,13 @@ class App extends React.Component {
           <Trigger trigger={this.state.trigger} handleToggle={this.handleToggle}/>
           <ConnectLine />
           {this.state.hasTimer ? (   
-            <Timer secondsInput={this.secondsInput} startTimer={this.startTimer} inputHandler={this.inputHandler} seconds={this.state.seconds} stopTimer={this.stopTimer} resetTimer={this.resetTimer}/>          
+            <Timer secondsInput={this.secondsInput} startTimer={this.startTimer} inputHandler={this.inputHandler} seconds={this.state.seconds} stopTimer={this.stopTimer} resetTimer={this.resetTimer} trigger={this.state.trigger}/>          
           ): (
             <ConnectLine />
           )}
           <ConnectLine />
 
-          <DebugOutput trigger={this.state.trigger} />
+          <DebugOutput hasTimer={this.state.hasTimer} trigger={this.state.trigger} timerOutput={this.state.timerOutput}/>
         </div>
       </div>
     );
