@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   startTimer = () => {
-    if(this.state.hasTimer){
+    if(this.state.trigger){
       this.timer = setInterval(this.countDown, 1000);
     }
   }
@@ -66,6 +66,13 @@ class App extends React.Component {
   async handleToggle(){
     let newTrigger = !this.state.trigger
     await this.setState({trigger: newTrigger})
+    if(this.state.hasTimer && this.state.trigger){
+      this.startTimer()
+    }
+    if(this.state.hasTimer && !this.state.trigger){
+      this.stopTimer()
+      this.resetTimer()
+    }
   }
 
   async addTimerBlock(){
