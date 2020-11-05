@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##To View This App:
+- fork & clone this repo
+- from the command line, run `npm install` inside this repository
+
 ## Available Scripts
 
 In the project directory, you can run:
