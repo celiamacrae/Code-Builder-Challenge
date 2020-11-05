@@ -10,7 +10,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `npm start`
 
 ## Features of this app
-- Trigger block: momentary output that sets the output of the block to true while selected 
+- Trigger block: Momentary output that sets the output of the block to true while selected 
+- Timer block: When the input becomes true, the timer starts. When timer expires, output is set to true for one second then set back to false. Configurable 1-10 seconds. 
 
 ## Available Scripts
 
