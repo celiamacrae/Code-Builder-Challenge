@@ -1,5 +1,7 @@
 # Teknikio Coding Challenge - Code Building App
 
+_Created by Celia Macrae_
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## To View This App:
