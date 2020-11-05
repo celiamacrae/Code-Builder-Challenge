@@ -1,4 +1,4 @@
-# Teknikio Coding Challenge -- Code Building App
+# Teknikio Coding Challenge - Code Building App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
